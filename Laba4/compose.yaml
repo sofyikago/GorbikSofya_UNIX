@@ -1,0 +1,15 @@
+services:
+  broker:
+    image: redis:7.4-alpine
+
+  controller:
+    build: ./controller
+    depends_on:
+      - broker
+
+  worker:
+    build: ./worker
+    depends_on:
+      - broker
+    deploy:
+      replicas: 3
